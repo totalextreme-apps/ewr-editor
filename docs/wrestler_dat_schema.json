@@ -1,0 +1,36 @@
+{
+  "recordSize": 307,
+  "marker": 52,
+  "fields": [
+    { "name": "id", "offset": 1, "type": "u16le" }
+  ],
+  "mappings": {
+    "gender": { "0": "Female", "65535": "Male" },
+    "weight": { "72": "Heavyweight", "76": "Lightweight" },
+    "nationality": {
+      "0": "Other",
+      "1": "American",
+      "2": "Australian",
+      "3": "British",
+      "4": "Canadian",
+      "5": "European",
+      "6": "Japanese",
+      "7": "Mexican"
+    },
+    "birthMonth": {
+      "0": "Unknown",
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    }
+  }
+}
