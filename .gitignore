@@ -34,3 +34,6 @@ src-tauri/tauri.conf_backup.json
 
 # EWR schema scratch
 src/ewr/wrestler_dat_schema.BROKEN.*
+
+# EWR schema scratch
+src/ewr/wrestler_dat_schema.BROKEN.*
