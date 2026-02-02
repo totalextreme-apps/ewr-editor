@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local backups
+src-tauri/tauri.conf_backup.json
