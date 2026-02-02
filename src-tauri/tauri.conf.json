@@ -34,9 +34,5 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
-  },
-  "platforms": {
-    "macos": "tauri.macos.conf.json",
-    "windows": "tauri.windows.conf.json"
   }
 }
