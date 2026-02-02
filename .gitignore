@@ -28,3 +28,6 @@ src-tauri/tauri.conf_backup.json
 
 # macOS
 .DS_Store
+
+# macOS
+.DS_Store
