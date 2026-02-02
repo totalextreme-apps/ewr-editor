@@ -169,6 +169,17 @@ body,
 
 select.ewr-input { cursor: pointer; }
 
+/*
+  Windows (WebView2) quirk: native select dropdown menus can render with a white
+  menu background but keep our light text color, resulting in white-on-white.
+  Apply a platform-specific override for option colors.
+*/
+.platform-windows select.ewr-input option,
+.platform-windows select.ewr-input optgroup {
+  background-color: #ffffff;
+  color: #111111;
+}
+
 .ewr-button {
   padding: 10px 12px;
   border-radius: 12px;
