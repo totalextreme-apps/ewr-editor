@@ -882,6 +882,11 @@ export default function App() {
     []
   );
 
+  // react-window v2 typings don't currently expose a `ref` prop on <List> in a way
+  // that plays nicely with React 19 + TS, but we rely on the imperative API
+  // (e.g., scrollToRow/scrollToItem). Cast once and keep the call sites clean.
+  const VirtualList: any = List;
+
   const [filePath, setFilePath] = useState<string | null>(null);
   const [rawBytes, setRawBytes] = useState<Uint8Array | null>(null);
 
@@ -1320,7 +1325,7 @@ export default function App() {
       const path = Array.isArray(picked) ? picked[0] : picked;
       const bytes = await readFile(path);
 
-      validateWrestlerDatBytes(bytes, schema);
+      validateWrestlerDatBytes(bytes);
 
       const parsed = parseWrestlerDat(toArrayBuffer(bytes));
 
@@ -1432,7 +1437,7 @@ export default function App() {
       });
 
       const outBytes = writeWrestlerDat(rawBytes, normalized as any);
-      validateWrestlerDatBytes(outBytes, schema);
+      validateWrestlerDatBytes(outBytes);
 
       const ts = new Date().toISOString().replace(/[-:]/g, "").replace(/\..+/, "").replace("T", "_");
       const bakPath = `${filePath}.${ts}.bak`;
@@ -1468,7 +1473,7 @@ export default function App() {
 
       const p = String(chosen);
       const bytes = await readFile(p);
-      validateWrestlerDatBytes(bytes, schema);
+      validateWrestlerDatBytes(bytes);
 
       const parsed = parseWrestlerDat(toArrayBuffer(bytes));
       const sorted = [...parsed].sort((a: any, b: any) =>
@@ -3585,9 +3590,9 @@ closeCsvModal();
                       overflowY: "hidden",
                     }}
                   >
-                    <List
+                    <VirtualList
                       key={`grid-${gridRows.length}-${gridListHeight}-${gridRenderWidth}`}
-                      ref={gridListRef as any}
+                      ref={gridListRef}
                       rowComponent={GridRow}
                       rowCount={gridRows.length}
                       rowHeight={54}
