@@ -1,0 +1,49 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Allow dialog open/save + filesystem read/write on Desktop for wrestler.dat editing (any drive)",
+  "local": true,
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "dialog:default",
+    "dialog:allow-open",
+    "dialog:allow-save",
+    "fs:allow-read-file",
+    "fs:allow-write-file",
+    "fs:allow-copy-file",
+    "fs:allow-exists",
+    "fs:allow-desktop-read-recursive",
+    "fs:allow-desktop-write-recursive",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        {
+          "path": "$HOME"
+        },
+        {
+          "path": "$HOME/**/*"
+        },
+        {
+          "path": "$DESKTOP"
+        },
+        {
+          "path": "$DESKTOP/**/*"
+        },
+        {
+          "path": "$DOCUMENT"
+        },
+        {
+          "path": "$DOCUMENT/**/*"
+        },
+        {
+          "path": "/Volumes"
+        },
+        {
+          "path": "/Volumes/**/*"
+        }
+      ]
+    }
+  ]
+}

@@ -2,62 +2,214 @@
   "file": "wrestler.dat",
   "recordSize": 307,
   "recordHeader": {
-    "marker": { "offset": 0, "type": "u8", "value": 52, "note": "0x34 ASCII '4'" },
-    "workerId": { "offset": 1, "type": "u16le" },
+    "marker": {
+      "offset": 0,
+      "type": "u8",
+      "value": 52,
+      "note": "0x34 ASCII '4'"
+    },
+    "workerId": {
+      "offset": 1,
+      "type": "u16le"
+    },
     "dataStartsAt": 3
   },
   "fields": [
-    { "name": "fullName", "offset": 3, "type": "ascii_fixed", "length": 25 },
-    { "name": "shortName", "offset": 28, "type": "ascii_fixed", "length": 10 },
-
-    { "name": "genderRaw", "offset": 38, "type": "u16le" },
-    { "name": "birthMonthRaw", "offset": 40, "type": "u16le", "note": "low byte is 0..12; high byte usually 0" },
-
-    { "name": "ageRaw", "offset": 42, "type": "u8", "note": "0..70 slider fits in a byte" },
-
-    { "name": "weightRaw", "offset": 44, "type": "u16le", "note": "low byte is 72 or 76; high byte usually 0" },
-
-    { "name": "wageThousandsRaw", "offset": 80, "type": "u16le", "note": "0..300 (represents $0..$300,000)" },
-
-    { "name": "brawling", "offset": 147, "type": "u8" },
-    { "name": "technical", "offset": 149, "type": "u8" },
-    { "name": "speed", "offset": 151, "type": "u8" },
-    { "name": "stiffness", "offset": 153, "type": "u8" },
-    { "name": "selling", "offset": 155, "type": "u8" },
-    { "name": "overness", "offset": 157, "type": "u8" },
-    { "name": "charisma", "offset": 159, "type": "u8" },
-    { "name": "attitude", "offset": 163, "type": "u8" },
-    { "name": "behaviour", "offset": 255, "type": "u8" },
-
-    { "name": "speaksRaw", "offset": 187, "type": "u16le" },
-
-    { "name": "primaryFinisherName", "offset": 189, "type": "ascii_fixed", "length": 25 },
-
-    { "name": "pfTypeFlagA", "offset": 214, "type": "u16le" },
-    { "name": "pfTypeFlagB", "offset": 216, "type": "u16le" },
-    { "name": "pfTypeFlagC", "offset": 218, "type": "u16le" },
-    { "name": "pfTypeFlagD", "offset": 249, "type": "u16le" },
-
-    { "name": "secondaryFinisherName", "offset": 220, "type": "ascii_fixed", "length": 25 },
-
-    { "name": "sfTypeFlagA", "offset": 245, "type": "u16le" },
-    { "name": "sfTypeFlagB", "offset": 247, "type": "u16le" },
-    { "name": "sfTypeFlagC", "offset": 249, "type": "u16le" },
-
-    { "name": "highSpotsRaw", "offset": 161, "type": "u16le" },
-    { "name": "shootingAbilityRaw", "offset": 165, "type": "u16le" },
-
-    { "name": "trainerRaw", "offset": 271, "type": "u16le" },
-    { "name": "superstarLookRaw", "offset": 273, "type": "u16le" },
-    { "name": "nationalityRaw", "offset": 275, "type": "u8" },
-    { "name": "menacingRaw", "offset": 277, "type": "u16le" },
-    { "name": "fonzFactorRaw", "offset": 279, "type": "u16le" },
-    { "name": "announcerRaw", "offset": 281, "type": "u16le" },
-    { "name": "bookerRaw", "offset": 283, "type": "u16le" },
-    { "name": "divaRaw", "offset": 293, "type": "u16le" }
+    {
+      "name": "fullName",
+      "offset": 3,
+      "type": "ascii_fixed",
+      "length": 25
+    },
+    {
+      "name": "shortName",
+      "offset": 28,
+      "type": "ascii_fixed",
+      "length": 10
+    },
+    {
+      "name": "photoName",
+      "offset": 45,
+      "type": "ascii_fixed",
+      "length": 20
+    },
+    {
+      "name": "genderRaw",
+      "offset": 38,
+      "type": "u16le"
+    },
+    {
+      "name": "birthMonthRaw",
+      "offset": 40,
+      "type": "u16le",
+      "note": "low byte is 0..12; high byte usually 0"
+    },
+    {
+      "name": "ageRaw",
+      "offset": 42,
+      "type": "u8",
+      "note": "0..70 slider fits in a byte"
+    },
+    {
+      "name": "weightRaw",
+      "offset": 44,
+      "type": "u8",
+      "note": "stored as u8 at +44 (72=Heavyweight, 76=Lightweight)"
+    },
+    {
+      "name": "wageThousandsRaw",
+      "offset": 80,
+      "type": "u16le",
+      "note": "0..300 (represents $0..$300,000)"
+    },
+    {
+      "name": "brawling",
+      "offset": 147,
+      "type": "u8"
+    },
+    {
+      "name": "technical",
+      "offset": 149,
+      "type": "u8"
+    },
+    {
+      "name": "speed",
+      "offset": 151,
+      "type": "u8"
+    },
+    {
+      "name": "stiffness",
+      "offset": 153,
+      "type": "u8"
+    },
+    {
+      "name": "selling",
+      "offset": 155,
+      "type": "u8"
+    },
+    {
+      "name": "overness",
+      "offset": 157,
+      "type": "u8"
+    },
+    {
+      "name": "charisma",
+      "offset": 159,
+      "type": "u8"
+    },
+    {
+      "name": "attitude",
+      "offset": 163,
+      "type": "u8"
+    },
+    {
+      "name": "behaviour",
+      "offset": 255,
+      "type": "u8"
+    },
+    {
+      "name": "speaksRaw",
+      "offset": 187,
+      "type": "u16le"
+    },
+    {
+      "name": "primaryFinisherName",
+      "offset": 189,
+      "type": "ascii_fixed",
+      "length": 25
+    },
+    {
+      "name": "pfTypeFlagA",
+      "offset": 214,
+      "type": "u16le"
+    },
+    {
+      "name": "pfTypeFlagB",
+      "offset": 216,
+      "type": "u16le"
+    },
+    {
+      "name": "pfTypeFlagC",
+      "offset": 218,
+      "type": "u16le"
+    },
+    {
+      "name": "secondaryFinisherName",
+      "offset": 220,
+      "type": "ascii_fixed",
+      "length": 25
+    },
+    {
+      "name": "sfTypeFlagA",
+      "offset": 245,
+      "type": "u16le"
+    },
+    {
+      "name": "sfTypeFlagB",
+      "offset": 247,
+      "type": "u16le"
+    },
+    {
+      "name": "sfTypeFlagC",
+      "offset": 249,
+      "type": "u16le"
+    },
+    {
+      "name": "highSpotsRaw",
+      "offset": 161,
+      "type": "u16le"
+    },
+    {
+      "name": "shootingAbilityRaw",
+      "offset": 165,
+      "type": "u16le"
+    },
+    {
+      "name": "trainerRaw",
+      "offset": 271,
+      "type": "u16le"
+    },
+    {
+      "name": "superstarLookRaw",
+      "offset": 273,
+      "type": "u16le"
+    },
+    {
+      "name": "nationalityRaw",
+      "offset": 275,
+      "type": "u8"
+    },
+    {
+      "name": "menacingRaw",
+      "offset": 277,
+      "type": "u16le"
+    },
+    {
+      "name": "fonzFactorRaw",
+      "offset": 279,
+      "type": "u16le"
+    },
+    {
+      "name": "announcerRaw",
+      "offset": 281,
+      "type": "u16le"
+    },
+    {
+      "name": "bookerRaw",
+      "offset": 283,
+      "type": "u16le"
+    },
+    {
+      "name": "divaRaw",
+      "offset": 293,
+      "type": "u16le"
+    }
   ],
   "mappings": {
-    "genderRaw": { "0": "Female", "65535": "Male" },
+    "genderRaw": {
+      "0": "Female",
+      "65535": "Male"
+    },
     "birthMonthRaw_lowByte": {
       "0": "Unknown",
       "1": "January",
@@ -73,7 +225,10 @@
       "11": "November",
       "12": "December"
     },
-    "weightRaw_lowByte": { "72": "Heavyweight", "76": "Lightweight" },
+    "weightRaw_lowByte": {
+      "72": "Heavyweight",
+      "76": "Lightweight"
+    },
     "nationalityRaw": {
       "0": "Other",
       "1": "American",
@@ -84,7 +239,10 @@
       "6": "Japanese",
       "7": "Mexican"
     },
-    "boolU16": { "0": "No", "65535": "Yes" }
+    "boolU16": {
+      "0": "No",
+      "65535": "Yes"
+    }
   },
   "notes": [
     "All u16le boolean flags use 0x0000 for off and 0xFFFF (65535) for on.",

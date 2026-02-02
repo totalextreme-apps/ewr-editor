@@ -1,0 +1,771 @@
+/* src/styles/ewrTheme.css */
+
+:root {
+  --bg0: #070a10;
+  --bg1: #0a1430;
+
+  --panel: rgba(0, 0, 0, 0.18);
+  --panel2: rgba(20, 26, 38, 0.70);
+
+  --border: rgba(255, 255, 255, 0.10);
+  --border2: rgba(255, 255, 255, 0.14);
+
+  --text: rgba(255, 255, 255, 0.95);
+  --muted: rgba(255, 255, 255, 0.75);
+
+  --blueA: rgba(46, 91, 255, 0.85);
+  --blueB: rgba(20, 35, 120, 0.85);
+
+  --greenA: rgba(36, 190, 110, 0.85);
+  --greenB: rgba(12, 110, 60, 0.85);
+
+  --copyBorder: rgba(120, 200, 255, 0.55);
+  --copyBg: rgba(120, 200, 255, 0.14);
+
+  --redA: rgba(255, 70, 70, 0.14);
+  --redB: rgba(255, 70, 70, 0.60);
+
+  --pillBg: rgba(255, 255, 255, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--bg0);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.ewr-app {
+  height: 100vh;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  background:
+    radial-gradient(1200px 800px at 20% 10%, rgba(46, 91, 255, 0.18), transparent 55%),
+    radial-gradient(1000px 700px at 80% 30%, rgba(255, 45, 45, 0.08), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg0) 65%);
+  overflow: hidden;
+}
+
+/* Panels are flex columns; allow children to shrink */
+.ewr-panel {
+  height: 100%;
+  min-height: 0;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ewr-left { margin-right: 6px; }
+.ewr-main { margin-left: 6px; }
+
+/* RIGHT PANEL MUST BE FLEX COLUMN (header fixed, body fills) */
+.ewr-panel.ewr-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.ewr-panelHeader {
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  flex: 0 0 auto;
+}
+
+.ewr-leftTopRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.ewr-divider {
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.10);
+  margin-top: 12px;
+}
+
+.ewr-leftBody {
+  padding: 12px 14px 14px;
+  flex: 0 0 auto;
+}
+
+/* LEFT PANEL: scrollable middle area (filters + worker list) */
+.ewr-leftMiddle {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.ewr-leftFooter {
+  padding: 12px 14px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.14);
+  flex: 0 0 auto;
+}
+
+
+
+/* Left footer button grid */
+.ewr-footerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* External Editing menu (compact, two columns) */
+.ewr-externalMenu {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ewr-buttonYellow {
+  background: rgba(255, 200, 0, 0.12);
+  border: 1px solid rgba(255, 200, 0, 0.38);
+}
+
+.ewr-buttonYellow:hover {
+  background: rgba(255, 200, 0, 0.18);
+  border-color: rgba(255, 200, 0, 0.55);
+}
+.ewr-scroll {
+  overflow: auto;
+  min-height: 0;
+}
+
+.ewr-leftSearchRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.ewr-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border2);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  outline: none;
+}
+
+.ewr-input:focus {
+  border-color: rgba(46, 91, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.18);
+}
+
+select.ewr-input { cursor: pointer; }
+
+.ewr-button {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border2);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 950;
+  letter-spacing: 0.2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.ewr-button:active { transform: translateY(1px); }
+
+.ewr-buttonBlue {
+  background: linear-gradient(180deg, var(--blueA), var(--blueB));
+  border: 1px solid rgba(46, 91, 255, 0.55);
+}
+
+.ewr-buttonGreen {
+  background: linear-gradient(180deg, var(--greenA), var(--greenB));
+  border: 1px solid rgba(36, 190, 110, 0.55);
+}
+
+.ewr-buttonApply {
+  background: linear-gradient(180deg, rgba(255, 170, 40, 0.95), rgba(200, 110, 10, 0.95));
+  border: 1px solid rgba(255, 170, 40, 0.65);
+}
+
+.ewr-buttonApply:hover {
+  filter: brightness(1.06);
+}
+
+
+.ewr-muted { opacity: 0.78; }
+.ewr-strong { font-weight: 950; }
+
+.ewr-mainHeader {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  flex: 0 0 auto;
+}
+
+.ewr-mainTitleBar {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  font-weight: 950;
+}
+
+.ewr-mainMetaRow {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.22);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ewr-pillRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ewr-pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pillBg);
+  font-weight: 900;
+  font-size: 12px;
+  opacity: 0.95;
+}
+
+/* MAIN BODY: must fill remaining height of right panel */
+.ewr-mainBody {
+  padding: 16px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Mode-specific overflow */
+.ewr-mainBodyScroll {
+  overflow: auto;
+}
+
+.ewr-mainBodyGrid {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Critical: ensure first-level children in grid mode can shrink and allow the grid to take full height */
+.ewr-mainBodyGrid > * {
+  min-height: 0;
+}
+
+.ewr-h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: 0.2px;
+}
+
+.ewr-subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.82;
+}
+
+.ewr-section {
+  margin-top: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(20, 26, 38, 0.55);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+/* Allow specific sections to let popovers/dropdowns overflow (e.g. Skills compare dropdown) */
+.ewr-sectionOverflowVisible {
+  overflow: visible;
+}
+
+.ewr-sectionHeader {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.ewr-sectionTitle {
+  font-weight: 950;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  opacity: 0.95;
+}
+
+.ewr-sectionBody { padding: 12px; }
+
+.ewr-label {
+  font-size: 12px;
+  opacity: 0.80;
+  margin-bottom: 6px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.ewr-grid { display: grid; gap: 14px; }
+.ewr-gridAuto { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+.ewr-field { min-width: 0; }
+
+.ewr-photoRow {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.ewr-hint { margin-top: 6px; font-size: 12px; opacity: 0.70; }
+.ewr-warn { margin-top: 6px; font-size: 12px; font-weight: 950; color: #ff4d4d; }
+
+/* Worker list rows */
+.ewr-workerRow {
+  padding: 8px 10px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.ewr-workerRowActive {
+  border: 1px solid rgba(46, 91, 255, 0.55);
+  background: rgba(46, 91, 255, 0.14);
+  box-shadow: 0 0 0 1px rgba(46, 91, 255, 0.25);
+}
+
+.ewr-workerRowInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ewr-workerName {
+  font-weight: 950;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+}
+
+/* Icon buttons (copy/delete) */
+.ewr-iconBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.ewr-iconBtn:active { transform: translateY(1px); }
+
+.ewr-iconBtnBlue {
+  border: 1px solid var(--copyBorder);
+  background: var(--copyBg);
+}
+
+.ewr-iconBtnRed {
+  border: 1px solid var(--redB);
+  background: var(--redA);
+}
+
+/* SVG sizing used by App.tsx */
+.btnSvg { width: 22px; height: 22px; }
+.iconBtnSvg { width: 22px; height: 22px; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .ewr-app { grid-template-columns: 340px 1fr; }
+}
+
+@media (max-width: 900px) {
+  .ewr-app { grid-template-columns: 1fr; }
+  .ewr-left { margin: 12px; margin-bottom: 6px; }
+  .ewr-main { margin: 12px; margin-top: 6px; }
+  .ewr-photoRow { grid-template-columns: 1fr; }
+}
+
+
+/* ---------- Filters (left panel) ---------- */
+
+.ewr-filterToggleRow {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ewr-filterToggleBtn {
+  flex: 1;
+  text-align: left;
+}
+
+.ewr-filterToggleActions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.ewr-filterInline {
+  display: flex;
+  gap: 8px;
+}
+
+.ewr-filterSection {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.ewr-filterFlagRow {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ewr-filterFlagLabel {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.ewr-filterTiny {
+  font-size: 12px;
+  opacity: 0.78;
+  font-weight: 700;
+}
+.ewr-filterPanel {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+
+.ewr-filterPanelCompact {
+  max-height: 260px;
+  overflow: auto;
+  padding-right: 6px;
+}
+.ewr-filterHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.ewr-filterTitle {
+  font-weight: 950;
+  letter-spacing: 0.2px;
+}
+
+.ewr-filterHeaderActions {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ewr-buttonSmall {
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-weight: 900;
+}
+
+.ewr-filterGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ewr-filterSkills {
+  margin-top: 10px;
+}
+
+.ewr-filterSubTitle {
+  font-size: 12px;
+  opacity: 0.78;
+  margin: 0 0 8px;
+}
+
+.ewr-filterSkillRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ewr-filterActionsRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+
+
+/* ---------- Import modal ---------- */
+.ewr-modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.ewr-modal {
+  width: min(760px, 96vw);
+  max-height: 90vh;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(14, 14, 18, 0.96);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ewr-modalHeader {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ewr-modalTitle {
+  font-size: 14px;
+  font-weight: 950;
+  letter-spacing: 0.2px;
+}
+
+.ewr-modalSub {
+  font-size: 12px;
+  opacity: 0.78;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ewr-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.ewr-modalBody {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  flex: 1;
+}
+
+.ewr-modalList {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px;
+  overflow: auto;
+  min-height: 140px;
+  flex: 1;
+}
+
+.ewr-importRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ewr-importRow:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ewr-importRow input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.ewr-importName {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.ewr-importInfo {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 170, 40, 0.30);
+  background: rgba(255, 170, 40, 0.10);
+  padding: 10px 12px;
+  font-size: 12px;
+  opacity: 0.92;
+}
+
+.ewr-modalFooter {
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ewr-modal .ewr-iconBtn {
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+/* --- Skills comparison (Profile view) --- */
+.ewr-compareBlock {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ewr-compareRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ewr-compareLabel {
+  font-size: 12px;
+  opacity: 0.85;
+  font-weight: 800;
+}
+
+.ewr-compareInput {
+  width: 360px;
+  max-width: 100%;
+}
+
+
+.ewr-compareCombo {
+  position: relative;
+  width: 360px;
+  max-width: 100%;
+}
+
+.ewr-compareDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 260px;
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 12, 18, 0.95);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+  padding: 6px;
+  /* must sit above subsequent sections/cards */
+  z-index: 9999;
+}
+
+.ewr-compareOption {
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0.92;
+  user-select: none;
+}
+
+.ewr-compareOption:hover,
+.ewr-compareOption.isActive {
+  background: rgba(255, 255, 255, 0.10);
+  opacity: 1;
+}
+.ewr-comparePanel {
+  margin-top: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(14, 18, 28, 0.60);
+  padding: 12px;
+}
+
+.ewr-comparePanelTitle {
+  font-size: 12px;
+  opacity: 0.88;
+  margin-bottom: 10px;
+}
+
+.ewr-compareStat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(10, 12, 18, 0.30);
+}
+
+.ewr-compareValue {
+  font-size: 14px;
+  font-weight: 900;
+  opacity: 0.95;
+}
+
+.ewr-compareDelta {
+  font-size: 12px;
+  font-weight: 900;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  opacity: 0.95;
+}
+
+/* no explicit colors (keeps theme neutral); border intensity only */
+.ewr-compareDelta[data-sign="pos"] {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.ewr-compareDelta[data-sign="neg"] {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.ewr-compareDelta[data-sign="zero"] {
+  opacity: 0.75;
+}

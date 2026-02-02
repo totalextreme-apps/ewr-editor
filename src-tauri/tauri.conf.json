@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "ewr_editor",
+  "productName": "EWR 4.2 WRESTLER.DAT Editor",
   "version": "0.1.0",
   "identifier": "com.mac1.ewr_editor",
   "build": {
@@ -12,9 +12,12 @@
   "app": {
     "windows": [
       {
-        "title": "ewr_editor",
-        "width": 800,
-        "height": 600
+        "title": "EWR 4.2 WRESTLER.DAT Editor",
+        "width": 1600,
+        "height": 900,
+        "resizable": true,
+        "fullscreen": false,
+        "devtools": true
       }
     ],
     "security": {
