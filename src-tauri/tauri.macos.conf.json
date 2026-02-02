@@ -1,3 +1,10 @@
 {
-  "app": { "windows": [ { "devtools": false } ] }
+  "app": {
+    "windows": [
+      {
+        "title": "EWR 4.2 WRESTLER.DAT Editor",
+        "devtools": false
+      }
+    ]
+  }
 }

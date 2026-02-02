@@ -1,6 +1,7 @@
 // src/App.tsx
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { List, type RowComponentProps } from "react-window";
 
 import schemaJson from "./ewr/wrestler_dat_schema.json";
@@ -882,11 +883,6 @@ export default function App() {
     []
   );
 
-  // react-window v2 typings don't currently expose a `ref` prop on <List> in a way
-  // that plays nicely with React 19 + TS, but we rely on the imperative API
-  // (e.g., scrollToRow/scrollToItem). Cast once and keep the call sites clean.
-  const VirtualList: any = List;
-
   const [filePath, setFilePath] = useState<string | null>(null);
   const [rawBytes, setRawBytes] = useState<Uint8Array | null>(null);
 
@@ -950,6 +946,19 @@ export default function App() {
   const [compareOpen, setCompareOpen] = useState<boolean>(false);
   const [compareActive, setCompareActive] = useState<number>(0);
   const compareInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Prevent mis-positioned dropdowns when scrolling/resize (and avoid WebKit stacking quirks)
+  useEffect(() => {
+    if (!compareOpen) return;
+    const close = () => setCompareOpen(false);
+    // capture scroll from any nested container
+    window.addEventListener("scroll", close, true);
+    window.addEventListener("resize", close);
+    return () => {
+      window.removeEventListener("scroll", close, true);
+      window.removeEventListener("resize", close);
+    };
+  }, [compareOpen]);
 
 
   // Import Worker (from another wrestler.dat)
@@ -2706,6 +2715,7 @@ closeCsvModal();
 
   // ---------- Spreadsheet-like navigation ----------
   const gridListRef = useRef<any>(null);
+  const VirtualList: any = List;
 
   function focusGridCell(rowPos: number, colPos: number, doScroll: boolean) {
     const r = clamp(rowPos, 0, Math.max(0, gridRows.length - 1));
@@ -3989,23 +3999,43 @@ closeCsvModal();
                         }}
                       />
 
-                      {compareOpen ? (
-                        <div className="ewr-compareDropdown">
-                          {getCompareFilteredNames().map((name, i) => (
-                            <div
-                              key={name}
-                              className={"ewr-compareOption" + (i === compareActive ? " isActive" : "")}
-                              onMouseDown={(ev) => {
-                                ev.preventDefault();
-                                applyCompareName(name);
-                              }}
-                              onMouseEnter={() => setCompareActive(i)}
-                            >
-                              {name}
-                            </div>
-                          ))}
-                        </div>
-                      ) : null}
+                      {compareOpen
+                        ? (() => {
+                            const el = compareInputRef.current;
+                            if (!el) return null;
+                            const r = el.getBoundingClientRect();
+                            const top = Math.round(r.bottom + 6);
+                            const left = Math.round(r.left);
+                            const width = Math.round(r.width);
+                            return createPortal(
+                              <div
+                                className="ewr-compareDropdown ewr-compareDropdownPortal"
+                                style={{ top, left, width }}
+                                onMouseDown={(ev) => {
+                                  // keep focus behavior stable so option clicks work even though dropdown is portaled
+                                  ev.preventDefault();
+                                }}
+                              >
+                                {getCompareFilteredNames().map((name, i) => (
+                                  <div
+                                    key={name}
+                                    className={
+                                      "ewr-compareOption" + (i === compareActive ? " isActive" : "")
+                                    }
+                                    onMouseDown={(ev) => {
+                                      ev.preventDefault();
+                                      applyCompareName(name);
+                                    }}
+                                    onMouseEnter={() => setCompareActive(i)}
+                                  >
+                                    {name}
+                                  </div>
+                                ))}
+                              </div>,
+                              document.body
+                            );
+                          })()
+                        : null}
                     </div>
                     </div>
 

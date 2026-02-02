@@ -169,17 +169,6 @@ body,
 
 select.ewr-input { cursor: pointer; }
 
-/*
-  Windows (WebView2) quirk: native select dropdown menus can render with a white
-  menu background but keep our light text color, resulting in white-on-white.
-  Apply a platform-specific override for option colors.
-*/
-.platform-windows select.ewr-input option,
-.platform-windows select.ewr-input optgroup {
-  background-color: #ffffff;
-  color: #111111;
-}
-
 .ewr-button {
   padding: 10px 12px;
   border-radius: 12px;
@@ -779,4 +768,43 @@ select.ewr-input { cursor: pointer; }
 
 .ewr-compareDelta[data-sign="zero"] {
   opacity: 0.75;
+}
+
+/* =========================================
+   Scrollbar theming (Windows/WebView2 + Chromium)
+   ========================================= */
+
+/* Firefox (harmless elsewhere) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+
+/* Chromium / WebView2 */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.28);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: rgba(255, 255, 255, 0.34);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
 }
